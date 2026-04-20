@@ -5,6 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PIP_NO_CACHE_DIR=1 \
     UV_LINK_MODE=copy \
     UV_COMPILE_BYTECODE=1 \
+    UV_NO_CACHE=1 \
     HF_HOME=/workspace/cache/huggingface \
     HF_HUB_ENABLE_HF_TRANSFER=1 \
     HUGGINGFACE_HUB_CACHE=/workspace/cache/huggingface/hub \
@@ -44,8 +45,13 @@ COPY workspace-template /opt/ltx2-runpod/workspace-template
 COPY README.md /opt/ltx2-runpod/project-README.md
 
 RUN chmod +x /opt/ltx2-runpod/scripts/*.sh \
+    && python3 -m venv --system-site-packages /opt/LTX-2/.venv \
+    && /opt/LTX-2/.venv/bin/pip install --upgrade pip setuptools wheel \
     && cd /opt/LTX-2 \
-    && uv sync --frozen --no-dev \
+    && /opt/LTX-2/.venv/bin/pip install --no-cache-dir \
+        -e packages/ltx-core \
+        -e packages/ltx-pipelines \
+        -e packages/ltx-trainer \
     && ln -sf /opt/ltx2-runpod/scripts/ltx2-download-models.sh /usr/local/bin/ltx2-download-models \
     && ln -sf /opt/ltx2-runpod/scripts/ltx2-preprocess.sh /usr/local/bin/ltx2-preprocess \
     && ln -sf /opt/ltx2-runpod/scripts/ltx2-train.sh /usr/local/bin/ltx2-train
