@@ -169,6 +169,7 @@ For detailed information on specific architectures, configurations, and advanced
 - [Sampling during Training](./docs/sampling_during_training.md)
 - [Tools and Utilities](./docs/tools.md)
 - [Using torch.compile](./docs/torch_compile.md)
+- [RunPod Template](./docs/runpod_template.md)
 
 ## Installation
 

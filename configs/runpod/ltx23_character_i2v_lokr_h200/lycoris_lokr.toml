@@ -1,0 +1,7 @@
+[network]
+base_algo = "lokr"
+base_factor = 16
+
+[network.init]
+lokr_norm = 1e-3
+

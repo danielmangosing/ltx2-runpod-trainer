@@ -1,0 +1,43 @@
+# RunPod-oriented mixed image + video character dataset for LTX 2.3 IC-LoRA.
+# Every item in a training dataset must have a reference file with the same stem
+# in the matching reference directory.
+
+[general]
+resolution = [1024, 576]
+caption_extension = ".txt"
+batch_size = 1
+enable_bucket = true
+bucket_no_upscale = true
+
+[[datasets]]
+video_directory = "/workspace/data/ltx23_character_i2v/train/videos"
+reference_directory = "/workspace/data/ltx23_character_i2v/train/references/videos"
+cache_directory = "/workspace/data/ltx23_character_i2v/cache/train/videos"
+reference_cache_directory = "/workspace/data/ltx23_character_i2v/cache/train/references/videos"
+num_repeats = 3
+frame_extraction = "full"
+max_frames = 49
+target_fps = 25
+
+[[datasets]]
+image_directory = "/workspace/data/ltx23_character_i2v/train/images"
+reference_directory = "/workspace/data/ltx23_character_i2v/train/references/images"
+cache_directory = "/workspace/data/ltx23_character_i2v/cache/train/images"
+reference_cache_directory = "/workspace/data/ltx23_character_i2v/cache/train/references/images"
+num_repeats = 2
+
+[[validation_datasets]]
+video_directory = "/workspace/data/ltx23_character_i2v/val/videos"
+reference_directory = "/workspace/data/ltx23_character_i2v/val/references/videos"
+cache_directory = "/workspace/data/ltx23_character_i2v/cache/val/videos"
+reference_cache_directory = "/workspace/data/ltx23_character_i2v/cache/val/references/videos"
+frame_extraction = "full"
+max_frames = 49
+target_fps = 25
+
+[[validation_datasets]]
+image_directory = "/workspace/data/ltx23_character_i2v/val/images"
+reference_directory = "/workspace/data/ltx23_character_i2v/val/references/images"
+cache_directory = "/workspace/data/ltx23_character_i2v/cache/val/images"
+reference_cache_directory = "/workspace/data/ltx23_character_i2v/cache/val/references/images"
+

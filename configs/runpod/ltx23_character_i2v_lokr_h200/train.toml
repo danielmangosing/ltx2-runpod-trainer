@@ -1,0 +1,86 @@
+dataset_config = "/workspace/musubi-tuner/configs/runpod/ltx23_character_i2v_lokr_h200/dataset.toml"
+ltx2_checkpoint = "/workspace/models/ltx/ltx-2.3-22b-dev.safetensors"
+gemma_root = "/workspace/models/gemma/gemma-3-12b-it"
+
+mixed_precision = "bf16"
+vae_dtype = "bf16"
+sdpa = true
+fp8_base = true
+fp8_scaled = true
+blocks_to_swap = 0
+gradient_checkpointing = true
+gradient_accumulation_steps = 1
+
+ltx_version = "2.3"
+ltx_version_check_mode = "error"
+ltx2_mode = "video"
+
+network_module = "lycoris.kohya"
+lycoris_config = "/workspace/musubi-tuner/configs/runpod/ltx23_character_i2v_lokr_h200/lycoris_lokr.toml"
+network_dim = 32
+network_alpha = 32
+
+ic_lora_strategy = "v2v"
+lora_target_preset = "video_sa_ca_ff"
+reference_frames = 1
+reference_downscale = 1
+ltx2_first_frame_conditioning_p = 0.3
+
+optimizer_type = "AdamW8bit"
+optimizer_args = ["weight_decay=0.01", "betas=(0.9,0.95)"]
+learning_rate = 1e-4
+lr_scheduler = "constant_with_warmup"
+lr_warmup_steps = 250
+max_train_steps = 5000
+max_grad_norm = 1.0
+
+max_data_loader_n_workers = 4
+persistent_data_loader_workers = true
+seed = 42
+
+timestep_sampling = "shifted_logit_normal"
+shifted_logit_mode = "stretched"
+
+motion_preservation = true
+motion_preservation_multiplier = 0.1
+motion_preservation_mode = "temporal"
+motion_preservation_anchor_source = "hybrid"
+motion_preservation_anchor_cache_auto = true
+motion_preservation_anchor_cache_auto_ratio = 0.25
+motion_preservation_anchor_cache_auto_min = 16
+motion_preservation_anchor_cache_auto_max = 96
+motion_preservation_synthetic_frames = 8
+motion_preservation_synthetic_temporal_corr = 0.92
+motion_preservation_synthetic_dataset_mix = 0.35
+motion_preservation_warmup_steps = 250
+motion_preservation_interval = 1
+
+sample_prompts = "/workspace/musubi-tuner/configs/runpod/ltx23_character_i2v_lokr_h200/sample_prompts.txt"
+sample_prompts_cache = "/workspace/data/ltx23_character_i2v/cache/shared/ltx2_sample_prompts_cache.pt"
+sample_latents_cache = "/workspace/data/ltx23_character_i2v/cache/shared/ltx2_sample_latents_cache.pt"
+use_precached_sample_prompts = true
+use_precached_sample_latents = true
+sample_at_first = true
+sample_every_n_steps = 500
+sample_include_reference = true
+sample_with_offloading = true
+sample_tiled_vae = true
+sample_vae_tile_size = 512
+sample_vae_tile_overlap = 64
+sample_vae_temporal_tile_size = 48
+sample_vae_temporal_tile_overlap = 8
+
+validate_every_n_steps = 250
+
+output_dir = "/workspace/output/ltx23_character_i2v_lokr_h200"
+output_name = "ltx23_character_i2v_lokr_h200"
+logging_dir = "/workspace/logs"
+log_prefix = "ltx23_character_i2v_lokr_h200_"
+training_comment = "RunPod H200 LTX 2.3 character IC-LoKR with mixed images and videos"
+
+save_every_n_steps = 500
+save_last_n_steps = 4
+save_state = true
+save_state_on_train_end = true
+autoresume = true
+

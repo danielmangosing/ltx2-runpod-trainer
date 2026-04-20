@@ -1,0 +1,8 @@
+# Replace char_subject with your trigger token or subject name.
+
+--v /workspace/data/ltx23_character_i2v/val/references/images/closeup_0001.png char_subject, cinematic close-up, subtle head turn, natural blinking, clean skin texture, shallow depth of field --n blurry, low quality, warped face, duplicate features --w 1024 --h 576 --f 49 --d 101 --s 25 --g 3.0
+
+--v /workspace/data/ltx23_character_i2v/val/references/images/medium_0001.png char_subject, medium shot, walking forward, confident expression, soft handheld camera drift, realistic lighting --n blurry, low quality, distorted anatomy, duplicate limbs --w 1024 --h 576 --f 49 --d 202 --s 25 --g 3.0
+
+--v /workspace/data/ltx23_character_i2v/val/references/videos/motion_0001.mp4 char_subject, full body shot, gentle turn, natural cloth motion, detailed hair movement, cinematic framing --n blurry, low quality, jitter, broken limbs --w 1024 --h 576 --f 49 --d 303 --s 25 --g 3.0
+

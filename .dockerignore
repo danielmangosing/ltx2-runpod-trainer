@@ -1,0 +1,17 @@
+.git
+.github
+.ai
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.venv/
+build/
+dist/
+images/
+output/
+logs/
+data/
+models/
+
