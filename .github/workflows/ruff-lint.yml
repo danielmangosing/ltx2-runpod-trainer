@@ -17,6 +17,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect changed Python files
+        id: changed-python
+        uses: tj-actions/changed-files@v46
+        with:
+          files: |
+            src/musubi_tuner/**/*.py
+            src/musubi_tuner/**/*.pth
 
       - name: "Set up Python"
         uses: actions/setup-python@v5
@@ -24,25 +34,26 @@ jobs:
           python-version-file: ".python-version"
 
       - name: "Install uv"
+        if: steps.changed-python.outputs.any_changed == 'true'
         uses: astral-sh/setup-uv@v6
         with:
           enable-cache: true
 
       - name: Install the project
+        if: steps.changed-python.outputs.any_changed == 'true'
         run: uv sync --dev
 
       - name: "Run Ruff check"
-        uses: astral-sh/ruff-action@v3
-        with:
-          args: >
-            check --fix
+        if: steps.changed-python.outputs.any_changed == 'true'
+        run: uv run ruff check --fix ${{ steps.changed-python.outputs.all_changed_files }}
 
       - name: "Run Ruff format check"
-        uses: astral-sh/ruff-action@v3
-        with:
-          args: >
-            format --check
-          # will exit with a non-zero code if there are formatting changes
+        if: steps.changed-python.outputs.any_changed == 'true'
+        run: uv run ruff format --check ${{ steps.changed-python.outputs.all_changed_files }}
+
+      - name: No Python changes to lint
+        if: steps.changed-python.outputs.any_changed != 'true'
+        run: echo "Skipping Ruff because this push did not change tracked Python files."
 
       # - name: Minimize uv cache
       #   run: uv cache prune --ci
