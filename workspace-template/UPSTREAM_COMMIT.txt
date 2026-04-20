@@ -1,0 +1,4 @@
+LTX-2 upstream snapshot
+commit: a2c3f24078eb918171967f74b6f66b756b29ee45
+commit_date: 2026-04-13 18:30:04 +0300
+subject: Merge pull request #192 from Lightricks/pr-2026-04-13-3c38708
